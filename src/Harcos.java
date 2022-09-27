@@ -52,10 +52,11 @@ public class Harcos {
     }
 
     public void setTapasztalat(Integer tapasztalat) {
-        if ((this.getSzintLepeshez()*(-1)) <= 0){
-            this.setSzint(this.getSzint()+1);
-        }
         this.tapasztalat = tapasztalat;
+        if (this.getSzintLepeshez() <= tapasztalat){
+            this.setTapasztalat(this.getTapasztalat()-getSzintLepeshez());
+            this.setSzint(this.getSzint());
+        }
     }
 
     public Integer getAlapEletero() {
@@ -97,7 +98,7 @@ public class Harcos {
     public void megkuzd(Harcos masikharcos) {
         if (this.nev.equals(masikharcos.nev)) {
             System.out.println("A harcos nem küzdhet meg saját magával.");
-        } else if (this.eletero <= 0 || masikharcos.eletero <= 0) {
+        }else if (this.eletero <= 0 || masikharcos.eletero <= 0) {
             if (this.eletero<=0){
                 this.setEletero(getAlapEletero());
                 this.setTapasztalat(0);
@@ -115,11 +116,11 @@ public class Harcos {
                 if (this.getEletero() > 0 && masikharcos.getEletero() > 0) {
                     this.setTapasztalat(this.getTapasztalat() + 5);
                     masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 5);
+                }else if (this.getEletero() <= 0 && masikharcos.getEletero() > 0) {
+                    masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 10);
+                } else if (this.getEletero() > 0 && masikharcos.getEletero() <= 0) {
+                    this.setTapasztalat(getTapasztalat() + 10);
                 }
-            }else if (masikharcos.eletero <= 0) {
-                this.setTapasztalat(getTapasztalat() + 10);
-            } else if (this.eletero <= 0) {
-                masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 10);
             }
         }
     }
