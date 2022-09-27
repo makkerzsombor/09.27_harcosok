@@ -19,7 +19,10 @@ public class Harcos {
         } else if (statuszSablon==3) {
             this.alapEletero = 8;
             this.alapSebzes = 5;
+        }else{
+            System.out.println("Hibás Státusz Sablon értéket adott meg!");
         }
+        this.eletero=alapEletero;
     }
 
     public String getNev() {
@@ -75,7 +78,11 @@ public class Harcos {
     }
 
     public void megkuzd(Harcos masikharcos){
+        if (true){
+            System.out.println("A harcos nem küzdhet meg saját magával.");
+        }else if(true){
 
+        }
     }
 
     @Override
