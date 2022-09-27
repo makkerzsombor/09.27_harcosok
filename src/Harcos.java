@@ -42,7 +42,7 @@ public class Harcos {
     }
 
     public void setSzint(Integer szint) {
-        this.szint = szint;
+        this.szint = szint + 1;
     }
 
     //tapasztalat
@@ -52,8 +52,7 @@ public class Harcos {
     }
 
     public void setTapasztalat(Integer tapasztalat) {
-        if (this.getSzintLepeshez() <= 0){
-            this.setTapasztalat(0);
+        if ((this.getSzintLepeshez()*(-1)) <= 0){
             this.setSzint(this.getSzint()+1);
         }
         this.tapasztalat = tapasztalat;
@@ -98,19 +97,29 @@ public class Harcos {
     public void megkuzd(Harcos masikharcos) {
         if (this.nev.equals(masikharcos.nev)) {
             System.out.println("A harcos nem küzdhet meg saját magával.");
-        } else if (this.eletero == 0 || masikharcos.eletero == 0) {
-            System.out.println("Az egyik harcos már meghalt.");
+        } else if (this.eletero <= 0 || masikharcos.eletero <= 0) {
+            if (this.eletero<=0){
+                this.setEletero(getAlapEletero());
+                this.setTapasztalat(0);
+                this.setSzint(0);
+            }else{
+                masikharcos.setEletero(getAlapEletero());
+                masikharcos.setTapasztalat(0);
+                masikharcos.setSzint(0);
+            }
         } else {
             masikharcos.setEletero(masikharcos.getEletero() - this.getSebzes());
             if (masikharcos.eletero > 0) {
                 this.setEletero(getEletero() - masikharcos.getSebzes());
-            } else if (this.eletero > 0 && masikharcos.eletero > 0) {
-                this.setTapasztalat(this.getTapasztalat() + 5);
-                masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 5);
-            } else if (masikharcos.eletero <= 0) {
-                this.setTapasztalat(getTapasztalat() + 15);
+                //xp
+                if (this.getEletero() > 0 && masikharcos.getEletero() > 0) {
+                    this.setTapasztalat(this.getTapasztalat() + 5);
+                    masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 5);
+                }
+            }else if (masikharcos.eletero <= 0) {
+                this.setTapasztalat(getTapasztalat() + 10);
             } else if (this.eletero <= 0) {
-                masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 15);
+                masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 10);
             }
         }
     }
@@ -125,7 +134,7 @@ public class Harcos {
 
     @Override
     public String toString() {
-        return nev + " - " + " LVL:" + szint + " EXP:" + tapasztalat + "/" + getSzintLepeshez() +
+        return nev + " - " + " LVL:" + getSzint() + " EXP:" + getTapasztalat() + "/" + getSzintLepeshez() +
                 " - HP:" + getEletero() + "/" + getMaxEletero() +" - DMG:" + getSebzes();
     }
 }

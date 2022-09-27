@@ -36,12 +36,14 @@ public class Main {
         harcosok.add(sHarcos);
 
         //körök 3/c
+        kiir();
         System.out.println("Kérem adja meg, hogy mit szeretne tenni." +
                 "\n (a) Megküzdeni egy harcossal." +
                 "\n (b) Gyógyulni." +
                 "\n (c) kilpéni.");
         String bekert = sc.nextLine();
         while(!bekert.equals("c")){
+
             if (bekert.equals("a")){
                 System.out.println("Válassza ki, hogy melyik harcossal szeretne megküzdeni (1-3)");
                 int szambe = sc.nextInt();
@@ -53,8 +55,15 @@ public class Main {
                     sc.nextLine();
                 }
                 sHarcos.megkuzd(harcosok.get(szambe-1));
+                kiir();
             } else if (bekert.equals("b")) {
                 sHarcos.gyogyul();
+                System.out.println("A harcosa gyógyult:");
+                System.out.println("Kérem adja meg, hogy mit szeretne tenni." +
+                        "\n (a) Megküzdeni egy harcossal." +
+                        "\n (b) Gyógyulni." +
+                        "\n (c) kilpéni.");
+                bekert = sc.nextLine();
             }else{
                 System.out.println("Kérem adja meg, hogy mit szeretne tenni." +
                         "\n (a) Megküzdeni egy harcossal." +
