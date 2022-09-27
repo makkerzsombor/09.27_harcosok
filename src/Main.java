@@ -35,22 +35,34 @@ public class Main {
         Harcos sHarcos = new Harcos(harcosNeve,(harcosClass));
         harcosok.add(sHarcos);
 
-        //körök 3/b
-        String bekert = "m";
+        //körök 3/c
+        System.out.println("Kérem adja meg, hogy mit szeretne tenni." +
+                "\n (a) Megküzdeni egy harcossal." +
+                "\n (b) Gyógyulni." +
+                "\n (c) kilpéni.");
+        String bekert = sc.nextLine();
         while(!bekert.equals("c")){
-            System.out.println("Kérem adja meg, hogy mit szeretne tenni." +
-                    "\n (a) Megküzdeni egy harcossal." +
-                    "\n (b) Gyógyulni." +
-                    "\n (c) kilpéni.");
-            bekert = sc.nextLine();
             if (bekert.equals("a")){
                 System.out.println("Válassza ki, hogy melyik harcossal szeretne megküzdeni (1-3)");
                 int szambe = sc.nextInt();
                 sc.nextLine();
-                sHarcos.megkuzd(harcosok.get(szambe));
+                while(szambe-1 > 3 || szambe-1 < 0){
+                    System.out.println("Rossz számot adott meg. " +
+                            "\nKérem adjon meg egy számot 1 és 3 között:");
+                    szambe = sc.nextInt();
+                    sc.nextLine();
+                }
+                sHarcos.megkuzd(harcosok.get(szambe-1));
+            } else if (bekert.equals("b")) {
+                sHarcos.gyogyul();
+            }else{
+                System.out.println("Kérem adja meg, hogy mit szeretne tenni." +
+                        "\n (a) Megküzdeni egy harcossal." +
+                        "\n (b) Gyógyulni." +
+                        "\n (c) kilpéni.");
+                bekert = sc.nextLine();
             }
         }
-
     }
     public static void fel2b(String fileName) throws IOException {
         harcosok = new ArrayList<>();
