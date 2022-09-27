@@ -8,6 +8,18 @@ public class Harcos {
 
     public Harcos(String nev, Integer statuszSablon) {
         this.nev = nev;
+        this.szint = 1;
+        this.tapasztalat = 0;
+        if (statuszSablon == 1){
+            this.alapEletero = 15;
+            this.alapSebzes = 3;
+        } else if (statuszSablon == 2) {
+            this.alapEletero = 12;
+            this.alapSebzes =4;
+        } else if (statuszSablon==3) {
+            this.alapEletero = 8;
+            this.alapSebzes = 5;
+        }
     }
 
     public String getNev() {
@@ -60,5 +72,15 @@ public class Harcos {
 
     public Integer getMaxEletero() {
         return this.alapEletero + (this.szint * 3);
+    }
+
+    public void megkuzd(Harcos masikharcos){
+
+    }
+
+    @Override
+    public String toString() {
+        return  nev + " - " + " LVL:" + szint +" EXP:" + tapasztalat +"/"+ getSzintLepeshez() +
+                " - HP:" + getEletero() + "/ maxéleterő - DMG:" + getSebzes();
     }
 }
