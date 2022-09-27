@@ -32,7 +32,9 @@ public class Main {
     }
 
     public static void kiir(){
-        harcosok.toString();
+        for (int i = 0; i < harcosok.size(); i++) {
+            System.out.println(harcosok.get(i).toString());
+        }
     }
 
 }
