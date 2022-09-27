@@ -10,19 +10,19 @@ public class Harcos {
         this.nev = nev;
         this.szint = 1;
         this.tapasztalat = 0;
-        if (statuszSablon == 1){
+        if (statuszSablon == 1) {
             this.alapEletero = 15;
             this.alapSebzes = 3;
         } else if (statuszSablon == 2) {
             this.alapEletero = 12;
-            this.alapSebzes =4;
-        } else if (statuszSablon==3) {
+            this.alapSebzes = 4;
+        } else if (statuszSablon == 3) {
             this.alapEletero = 8;
             this.alapSebzes = 5;
-        }else{
+        } else {
             System.out.println("Hibás Státusz Sablon értéket adott meg!");
         }
-        this.eletero=alapEletero;
+        this.eletero = alapEletero;
     }
 
     public String getNev() {
@@ -77,17 +77,29 @@ public class Harcos {
         return this.alapEletero + (this.szint * 3);
     }
 
-    public void megkuzd(Harcos masikharcos){
-        if (true){
+    public void megkuzd(Harcos masikharcos) {
+        if (this.nev.equals(masikharcos.nev)) {
             System.out.println("A harcos nem küzdhet meg saját magával.");
-        }else if(true){
-
+        } else if (this.eletero == 0 || masikharcos.eletero == 0) {
+            System.out.println("Az egyik harcos már meghalt.");
+        } else {
+            masikharcos.setEletero(masikharcos.getEletero()-this.getSebzes());
+            if (masikharcos.eletero > 0) {
+                this.setEletero(getEletero()-masikharcos.getSebzes());
+            } else if (this.eletero > 0 && masikharcos.eletero > 0) {
+                this.setTapasztalat(this.getTapasztalat() + 5);
+                masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 5);
+            } else if (masikharcos.eletero <= 0) {
+                this.setTapasztalat(getTapasztalat() + 15);
+            } else if (this.eletero <= 0) {
+                masikharcos.setTapasztalat(masikharcos.getTapasztalat() + 15);
+            }
         }
     }
 
     @Override
     public String toString() {
-        return  nev + " - " + " LVL:" + szint +" EXP:" + tapasztalat +"/"+ getSzintLepeshez() +
+        return nev + " - " + " LVL:" + szint + " EXP:" + tapasztalat + "/" + getSzintLepeshez() +
                 " - HP:" + getEletero() + "/ maxéleterő - DMG:" + getSebzes();
     }
 }
